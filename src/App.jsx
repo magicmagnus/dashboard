@@ -247,14 +247,14 @@ function App() {
                 title: {
                     display: !isMobile,
                     text: "Temperature (°C)",
-                    color: "rgb(255, 99, 132)",
+                    color: "#fb2c36",
                     font: {
                         size: 18,
                         family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
-                    color: "rgb(255, 99, 132)",
+                    color: "#fb2c36",
                     maxTicksLimit: isMobile ? 3 : 5,
                     font: {
                         size: isMobile ? 16 : 24,
@@ -273,14 +273,14 @@ function App() {
                 title: {
                     display: !isMobile,
                     text: "Humidity (%)",
-                    color: "rgb(54, 162, 235)",
+                    color: "#2b7fff",
                     font: {
                         size: 18,
                         family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
-                    color: "rgb(54, 162, 235)",
+                    color: "#2b7fff",
                     maxTicksLimit: isMobile ? 3 : 5,
                     font: {
                         size: isMobile ? 16 : 24,
@@ -299,14 +299,14 @@ function App() {
                 title: {
                     display: !isMobile,
                     text: "Pressure (hPa)",
-                    color: "rgb(0, 201, 81)",
+                    color: "#00c951",
                     font: {
                         size: 18,
                         family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
-                    color: "rgb(0, 201, 81)",
+                    color: "#00c951",
                     maxTicksLimit: isMobile ? 3 : 5,
                     font: {
                         size: isMobile ? 16 : 24,
@@ -330,10 +330,10 @@ function App() {
 
     if (loading) {
         return (
-            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-gray-200">
-                <div className="rounded-lg bg-white p-6 text-center shadow-lg">
+            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
+                <div className="border-2 border-gray-400 bg-zinc-800 p-6 text-center shadow-lg">
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
-                    <p className="mt-4 text-gray-600">Loading sensor data...</p>
+                    <p className="mt-4 text-gray-300">Loading sensor data...</p>
                 </div>
             </div>
         );
@@ -341,12 +341,12 @@ function App() {
 
     if (error) {
         return (
-            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-gray-200">
-                <div className="rounded-lg bg-white p-6 text-center shadow-lg">
+            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
+                <div className="border-2 border-gray-400 bg-zinc-800 p-6 text-center shadow-lg">
                     <p className="mb-4 text-red-500">{error}</p>
                     <button
                         onClick={fetchSensorData}
-                        className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+                        className="border bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
                     >
                         Retry
                     </button>
