@@ -4,7 +4,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Roboto", "sans-serif"],
+                poppins: ["Poppins", "sans-serif"],
+                jersey10: ["Jersey 10 Regular"],
+                jersey25: ["Jersey 25 Regular"],
             },
         },
     },

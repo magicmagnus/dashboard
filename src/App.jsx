@@ -12,6 +12,7 @@ import {
     TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
+import { color } from "chart.js/helpers";
 
 ChartJS.register(
     CategoryScale,
@@ -107,35 +108,35 @@ function App() {
                 {
                     label: "Temperature (°C)",
                     data: temperatureData,
-                    borderColor: "rgb(255, 99, 132)",
-                    backgroundColor: "rgba(255, 99, 132, 0.1)",
+                    borderColor: "#fb2c36",
                     yAxisID: "y",
                     tension: 0.5,
                     pointRadius: 0,
                     pointHoverRadius: 4,
-                    borderWidth: isMobile ? 1.5 : 2,
+                    borderWidth: isMobile ? 1.5 : 2.5,
+                    stepped: true,
                 },
                 {
                     label: "Humidity (%)",
                     data: humidityData,
-                    borderColor: "rgb(54, 162, 235)",
-                    backgroundColor: "rgba(54, 162, 235, 0.1)",
+                    borderColor: "#2b7fff",
                     yAxisID: "y1",
                     tension: 0.5,
                     pointRadius: 0,
                     pointHoverRadius: 4,
-                    borderWidth: isMobile ? 1.5 : 2,
+                    borderWidth: isMobile ? 1.5 : 2.5,
+                    stepped: true,
                 },
                 {
                     label: "Pressure (hPa)",
                     data: pressureData,
-                    borderColor: "rgba(0, 201, 81, 0.4)",
-                    backgroundColor: "rgba(75, 192, 192, 0.1)",
+                    borderColor: "#00c951",
                     yAxisID: "y2",
                     tension: 0.5,
                     pointRadius: 0,
                     pointHoverRadius: 4,
-                    borderWidth: isMobile ? 1.5 : 2,
+                    borderWidth: isMobile ? 1.5 : 2.5,
+                    stepped: true,
                 },
             ],
         };
@@ -162,23 +163,45 @@ function App() {
                 position: "bottom",
                 labels: {
                     font: {
-                        size: isMobile ? 11 : 12,
+                        size: isMobile ? 15 : 18,
+                        family: "'Jersey 10', monospace",
                     },
-                    padding: isMobile ? 12 : 20,
+                    padding: isMobile ? 8 : 20,
                     usePointStyle: true,
                     pointStyle: "line",
+                    pointStyleWidth: 10,
+                    color: "white",
                 },
             },
             title: {
                 display: false,
             },
             tooltip: {
+                enabled: true,
+                boxPadding: 5,
+                usePointStyle: true,
+                callbacks: {
+                    labelPointStyle: function (context) {
+                        return {
+                            pointStyle: "line",
+                            rotation: 0,
+                        };
+                    },
+                    labelBorderWidth: function (context) {
+                        return 6;
+                    },
+                },
                 titleFont: {
-                    size: isMobile ? 11 : 12,
+                    size: isMobile ? 14 : 16,
+                    family: "'Jersey 10', monospace",
                 },
                 bodyFont: {
-                    size: isMobile ? 10 : 12,
+                    size: isMobile ? 14 : 16,
+                    family: "'Jersey 10', monospace",
                 },
+                cornerRadius: 0,
+                caretSize: 8,
+                caretPadding: 4,
             },
         },
         scales: {
@@ -187,10 +210,6 @@ function App() {
                 display: true,
                 title: {
                     display: false,
-                    text: "Time",
-                    font: {
-                        size: isMobile ? 10 : 12,
-                    },
                 },
                 time: {
                     unit: getTimeScaleUnit(timeRangeDays),
@@ -210,12 +229,15 @@ function App() {
                               ? 16
                               : 8,
                     font: {
-                        size: isMobile ? 9 : 11,
+                        size: isMobile ? 16 : 24,
+                        family: "'Micro 5', monospace",
                     },
                     maxRotation: isMobile ? 45 : 0,
+                    color: "white",
                 },
                 grid: {
                     display: true,
+                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
             y: {
@@ -227,18 +249,21 @@ function App() {
                     text: "Temperature (°C)",
                     color: "rgb(255, 99, 132)",
                     font: {
-                        size: 12,
+                        size: 18,
+                        family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
                     color: "rgb(255, 99, 132)",
                     maxTicksLimit: isMobile ? 3 : 5,
                     font: {
-                        size: isMobile ? 10 : 12,
+                        size: isMobile ? 16 : 24,
+                        family: "'Micro 5', monospace",
                     },
                 },
                 grid: {
                     display: true,
+                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
             y1: {
@@ -250,41 +275,47 @@ function App() {
                     text: "Humidity (%)",
                     color: "rgb(54, 162, 235)",
                     font: {
-                        size: 12,
+                        size: 18,
+                        family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
                     color: "rgb(54, 162, 235)",
                     maxTicksLimit: isMobile ? 3 : 5,
                     font: {
-                        size: isMobile ? 10 : 12,
+                        size: isMobile ? 16 : 24,
+                        family: "'Micro 5', monospace",
                     },
                 },
                 grid: {
                     drawOnChartArea: false,
+                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
             y2: {
                 type: "linear",
-                display: false, // Hide pressure axis on mobile
+                display: true,
                 position: "left",
                 title: {
                     display: !isMobile,
                     text: "Pressure (hPa)",
-                    color: "rgb(75, 192, 192, 0.5)",
+                    color: "rgb(0, 201, 81)",
                     font: {
-                        size: 12,
+                        size: 18,
+                        family: "'Jersey 10', monospace",
                     },
                 },
                 ticks: {
-                    color: "rgb(75, 192, 192)",
-                    maxTicksLimit: isMobile ? 4 : 5,
+                    color: "rgb(0, 201, 81)",
+                    maxTicksLimit: isMobile ? 3 : 5,
                     font: {
-                        size: isMobile ? 8 : 10,
+                        size: isMobile ? 16 : 24,
+                        family: "'Micro 5', monospace",
                     },
                 },
                 grid: {
                     drawOnChartArea: false,
+                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
         },
@@ -299,7 +330,7 @@ function App() {
 
     if (loading) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-gray-200">
+            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-gray-200">
                 <div className="rounded-lg bg-white p-6 text-center shadow-lg">
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
                     <p className="mt-4 text-gray-600">Loading sensor data...</p>
@@ -310,7 +341,7 @@ function App() {
 
     if (error) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-gray-200">
+            <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-gray-200">
                 <div className="rounded-lg bg-white p-6 text-center shadow-lg">
                     <p className="mb-4 text-red-500">{error}</p>
                     <button
@@ -325,38 +356,38 @@ function App() {
     }
 
     return (
-        <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-200">
-            <div className="flex w-full flex-col items-center justify-start rounded-2xl bg-gray-100 shadow-lg sm:max-w-6xl">
+        <div className="font-jersey-10 flex min-h-[100dvh] flex-col items-center justify-center bg-zinc-950 text-white">
+            <div className="flex w-full flex-col items-center justify-start border-2 border-gray-400 bg-zinc-950 shadow-lg sm:max-w-6xl">
                 {/* Header */}
                 {/*  <h2 className="mb-6 mt-6 text-2xl font-bold text-gray-800 sm:text-5xl">Pi Sensor Dashboard</h2> */}
                 {/* Latest Sensor Readings */}
                 {sensorData && (
-                    <div className="m-4 grid grid-cols-2 gap-2 text-xl text-gray-600 sm:gap-4 sm:text-xl md:grid-cols-3">
-                        <div className="rounded-xl bg-white p-3 text-center shadow-md">
+                    <div className="m-4 mt-6 grid grid-cols-2 gap-3 text-3xl text-gray-300 sm:gap-4 sm:text-xl md:grid-cols-3">
+                        <div className="border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md">
                             <p className="font-semibold">Temperature</p>
-                            <p className="text-3xl font-semibold text-red-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-red-500 sm:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
                                     ]?.field1
-                                }
+                                }{" "}
                                 °C
                             </p>
                         </div>
-                        <div className="rounded-xl bg-white p-3 text-center shadow-md">
+                        <div className="border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md">
                             <p className="font-semibold">Humidity</p>
-                            <p className="text-3xl font-semibold text-blue-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-blue-500 sm:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
                                     ]?.field2
-                                }
+                                }{" "}
                                 %
                             </p>
                         </div>
-                        <div className="col-span-2 rounded-xl bg-white p-3 text-center shadow-md md:col-span-1">
+                        <div className="col-span-2 border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md md:col-span-1">
                             <p className="font-semibold">Pressure</p>
-                            <p className="text-3xl font-semibold text-green-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-green-500 sm:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
@@ -380,14 +411,14 @@ function App() {
 
                 {/* Controls */}
                 {/* Time Range Buttons */}
-                <div className="flex items-center justify-center gap-2 p-4">
-                    <p className="text-sm font-semibold text-gray-600">
+                <div className="flex items-center justify-center gap-2 border-2 border-gray-400 bg-zinc-800 p-3">
+                    <p className="text-lg font-semibold text-gray-300">
                         Time Range:
                     </p>
-                    <div className="flex gap-2">
+                    <div className="text-md flex gap-2">
                         <button
                             onClick={() => setTimeRangeDays(0.5)}
-                            className={`rounded px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 0.5
                                     ? "bg-blue-500 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -397,7 +428,7 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(1)}
-                            className={`rounded px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 1
                                     ? "bg-blue-500 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -407,7 +438,7 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(2)}
-                            className={`rounded px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 2
                                     ? "bg-blue-500 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -417,7 +448,7 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(3)}
-                            className={`rounded px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 3
                                     ? "bg-blue-500 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -431,7 +462,7 @@ function App() {
                 {/* Refresh Button */}
                 <button
                     onClick={fetchSensorData}
-                    className="text-md mt-0 rounded bg-green-500 px-3 py-2 font-bold text-white hover:bg-green-700 sm:px-4 sm:text-sm"
+                    className="mt-4 border-2 border-green-900 bg-green-500 px-3 py-2 text-2xl font-bold text-white hover:bg-green-700 sm:px-4 sm:text-sm"
                     disabled={loading}
                 >
                     Refresh
