@@ -387,7 +387,7 @@ function App() {
         return (
             <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
                 <div className="pixel-border-card bg-zinc-700 p-6 text-center shadow-lg">
-                    <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
+                    <div className="atebits-loader"></div>
                     <p className="mt-4 text-gray-300">Loading sensor data...</p>
                 </div>
             </div>
@@ -483,7 +483,7 @@ function App() {
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
-                                12 H
+                                {isMobile ? "12 H" : "12 Hours"}
                             </button>
                             <button
                                 onClick={() => {
@@ -496,7 +496,7 @@ function App() {
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
-                                1 D
+                                {isMobile ? "1 D" : "1 Day"}
                             </button>
                             <button
                                 onClick={() => {
@@ -509,7 +509,7 @@ function App() {
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
-                                2 D
+                                {isMobile ? "2 D" : "2 Days"}
                             </button>
                             <button
                                 onClick={() => {
@@ -522,7 +522,7 @@ function App() {
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
-                                3 D
+                                {isMobile ? "3 D" : "3 Days"}
                             </button>
                         </div>
                     </div>
@@ -541,7 +541,6 @@ function App() {
                             style={{ fontFamily: "'Jersey 10', monospace" }}
                         >
                             <option value={1}>No Averaging</option>
-                            <option value={5}>5 Minutes</option>
                             <option value={15}>15 Minutes</option>
                             <option value={30}>30 Minutes</option>
                             <option value={60}>1 Hour</option>
