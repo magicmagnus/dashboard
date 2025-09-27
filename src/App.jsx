@@ -331,7 +331,7 @@ function App() {
     if (loading) {
         return (
             <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
-                <div className="border-2 border-gray-400 bg-zinc-800 p-6 text-center shadow-lg">
+                <div className="pixel-border-card bg-zinc-700 p-6 text-center shadow-lg">
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
                     <p className="mt-4 text-gray-300">Loading sensor data...</p>
                 </div>
@@ -342,7 +342,7 @@ function App() {
     if (error) {
         return (
             <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
-                <div className="border-2 border-gray-400 bg-zinc-800 p-6 text-center shadow-lg">
+                <div className="pixel-border-card bg-zinc-700 p-6 text-center shadow-lg">
                     <p className="mb-4 text-red-500">{error}</p>
                     <button
                         onClick={fetchSensorData}
@@ -356,16 +356,16 @@ function App() {
     }
 
     return (
-        <div className="font-jersey-10 flex min-h-[100dvh] flex-col items-center justify-center bg-zinc-950 text-white">
-            <div className="flex w-full flex-col items-center justify-start border-2 border-gray-400 bg-zinc-950 shadow-lg sm:max-w-6xl">
+        <div className="font-jersey-10 flex min-h-[100dvh] flex-col items-center justify-center bg-zinc-950 p-2 text-white">
+            <div className="pixel-border-background flex w-full flex-1 flex-col items-center justify-start bg-zinc-800 shadow-lg sm:max-w-6xl md:flex-0">
                 {/* Header */}
                 {/*  <h2 className="mb-6 mt-6 text-2xl font-bold text-gray-800 sm:text-5xl">Pi Sensor Dashboard</h2> */}
                 {/* Latest Sensor Readings */}
                 {sensorData && (
-                    <div className="m-4 mt-6 grid grid-cols-2 gap-3 text-3xl text-gray-300 sm:gap-4 sm:text-xl md:grid-cols-3">
-                        <div className="border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md">
+                    <div className="m-4 mb-6 grid grid-cols-2 gap-5 text-3xl text-gray-100 md:m-8 md:grid-cols-3 md:gap-6 md:text-4xl">
+                        <div className="pixel-border-card-red bg-red-950 p-3 text-center shadow-md">
                             <p className="font-semibold">Temperature</p>
-                            <p className="font-jersey-10 text-5xl font-semibold text-red-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-red-500 md:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
@@ -374,9 +374,9 @@ function App() {
                                 °C
                             </p>
                         </div>
-                        <div className="border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md">
+                        <div className="pixel-border-card-blue bg-blue-950 p-3 text-center shadow-md">
                             <p className="font-semibold">Humidity</p>
-                            <p className="font-jersey-10 text-5xl font-semibold text-blue-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-blue-500 md:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
@@ -385,9 +385,9 @@ function App() {
                                 %
                             </p>
                         </div>
-                        <div className="col-span-2 border-2 border-gray-400 bg-zinc-800 p-3 text-center shadow-md md:col-span-1">
+                        <div className="pixel-border-card-green col-span-2 bg-green-950 p-3 text-center shadow-md md:col-span-1">
                             <p className="font-semibold">Pressure</p>
-                            <p className="font-jersey-10 text-5xl font-semibold text-green-500 sm:text-5xl">
+                            <p className="font-jersey-10 text-5xl font-semibold text-green-500 md:text-5xl">
                                 {
                                     sensorData.feeds[
                                         sensorData.feeds.length - 1
@@ -411,16 +411,16 @@ function App() {
 
                 {/* Controls */}
                 {/* Time Range Buttons */}
-                <div className="flex items-center justify-center gap-2 border-2 border-gray-400 bg-zinc-800 p-3">
-                    <p className="text-lg font-semibold text-gray-300">
+                <div className="pixel-border-card mt-4 flex items-center justify-center gap-2 bg-zinc-700 p-3">
+                    <p className="text-xl font-semibold text-gray-100">
                         Time Range:
                     </p>
                     <div className="text-md flex gap-2">
                         <button
                             onClick={() => setTimeRangeDays(0.5)}
-                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 0.5
-                                    ? "bg-blue-500 text-white"
+                                    ? "pixel-border-button-red bg-red-600 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}
                         >
@@ -428,9 +428,9 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(1)}
-                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 1
-                                    ? "bg-blue-500 text-white"
+                                    ? "pixel-border-button-red bg-red-600 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}
                         >
@@ -438,9 +438,9 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(2)}
-                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 2
-                                    ? "bg-blue-500 text-white"
+                                    ? "pixel-border-button-red bg-red-600 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}
                         >
@@ -448,9 +448,9 @@ function App() {
                         </button>
                         <button
                             onClick={() => setTimeRangeDays(3)}
-                            className={`border px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
+                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
                                 timeRangeDays === 3
-                                    ? "bg-blue-500 text-white"
+                                    ? "pixel-border-button-red bg-red-600 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}
                         >
@@ -462,15 +462,15 @@ function App() {
                 {/* Refresh Button */}
                 <button
                     onClick={fetchSensorData}
-                    className="mt-4 border-2 border-green-900 bg-green-500 px-3 py-2 text-2xl font-bold text-white hover:bg-green-700 sm:px-4 sm:text-sm"
+                    className="pixel-border-button-green mt-8 bg-green-500 px-5 py-2 text-3xl font-bold text-white hover:bg-green-700 md:text-4xl"
                     disabled={loading}
                 >
                     Refresh
                 </button>
 
-                {/* Data Point Counter */}
-                <div className="mb-4a mt-4 text-center">
-                    <p className="text-xs font-semibold sm:text-sm">
+                {/* Data Point Counter*/}
+                <div className="mt-5 mb-3 text-center">
+                    <p className="text-xs font-semibold text-gray-400 sm:text-sm">
                         Data Points ({timeRangeDays}d)
                     </p>
                     <p className="text-sm text-gray-500 sm:text-lg">

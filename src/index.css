@@ -3,6 +3,7 @@
 
 @import "tailwindcss";
 
+
 @theme {
     --font-poppins: 'Poppins', 'sans-serif';
     --font-jersey-10: "Jersey 10", "sans-serif";
@@ -14,3 +15,106 @@
 }
 
 * {}
+
+.pixel-border-card {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-zinc-700),
+        3px 0px 0px 0px var(--color-zinc-700),
+        0px 3px 0px 0px var(--color-zinc-700),
+        0px -3px 0px 0px var(--color-zinc-700),
+
+        -6px 0px 0px 0px var(--color-gray-400),
+        0px 6px 0px 0px var(--color-gray-400),
+        6px 0px 0px 0px var(--color-gray-400),
+        0px -6px 0px 0px var(--color-gray-400),
+
+        0px 0px 0px 3px var(--color-gray-400);
+
+}
+
+.pixel-border-card-red {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-red-950),
+        3px 0px 0px 0px var(--color-red-950),
+        0px 3px 0px 0px var(--color-red-950),
+        0px -3px 0px 0px var(--color-red-950),
+
+        -6px 0px 0px 0px var(--color-red-600),
+        0px 6px 0px 0px var(--color-red-600),
+        6px 0px 0px 0px var(--color-red-600),
+        0px -6px 0px 0px var(--color-red-600),
+
+        0px 0px 0px 3px var(--color-red-600);
+
+}
+
+.pixel-border-card-blue {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-blue-950),
+        3px 0px 0px 0px var(--color-blue-950),
+        0px 3px 0px 0px var(--color-blue-950),
+        0px -3px 0px 0px var(--color-blue-950),
+
+        -6px 0px 0px 0px var(--color-blue-600),
+        0px 6px 0px 0px var(--color-blue-600),
+        6px 0px 0px 0px var(--color-blue-600),
+        0px -6px 0px 0px var(--color-blue-600),
+
+        0px 0px 0px 3px var(--color-blue-600);
+
+}
+
+.pixel-border-card-green {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-green-950),
+        3px 0px 0px 0px var(--color-green-950),
+        0px 3px 0px 0px var(--color-green-950),
+        0px -3px 0px 0px var(--color-green-950),
+
+        -6px 0px 0px 0px var(--color-green-600),
+        0px 6px 0px 0px var(--color-green-600),
+        6px 0px 0px 0px var(--color-green-600),
+        0px -6px 0px 0px var(--color-green-600),
+
+        0px 0px 0px 3px var(--color-green-600);
+
+}
+
+.pixel-border-background {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-zinc-800),
+        3px 0px 0px 0px var(--color-zinc-800),
+        0px 3px 0px 0px var(--color-zinc-800),
+        0px -3px 0px 0px var(--color-zinc-800),
+
+        -6px 0px 0px 0px var(--color-gray-500),
+        0px 6px 0px 0px var(--color-gray-500),
+        6px 0px 0px 0px var(--color-gray-500),
+        0px -6px 0px 0px var(--color-gray-500),
+
+        0px 0px 0px 3px var(--color-gray-500);
+
+}
+
+.pixel-border-button-green {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-green-500),
+        3px 0px 0px 0px var(--color-green-500),
+        0px 3px 0px 0px var(--color-green-500),
+        0px -3px 0px 0px var(--color-green-500),
+
+        -6px 0px 0px 0px var(--color-green-800),
+        0px 6px 0px 0px var(--color-green-800),
+        6px 0px 0px 0px var(--color-green-800),
+        0px -6px 0px 0px var(--color-green-800),
+
+        0px 0px 0px 3px var(--color-green-800);
+}
+
+.pixel-border-button-red {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-red-800),
+        3px 0px 0px 0px var(--color-red-800),
+        0px 3px 0px 0px var(--color-red-800),
+        0px -3px 0px 0px var(--color-red-800);
+}
