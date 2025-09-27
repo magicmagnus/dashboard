@@ -118,3 +118,29 @@
         0px 3px 0px 0px var(--color-red-800),
         0px -3px 0px 0px var(--color-red-800);
 }
+
+
+
+.pixel-border-button-gray {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-gray-300),
+        3px 0px 0px 0px var(--color-gray-300),
+        0px 3px 0px 0px var(--color-gray-300),
+        0px -3px 0px 0px var(--color-gray-300);
+}
+
+.pixel-border-button-gray:hover {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-gray-400),
+        3px 0px 0px 0px var(--color-gray-400),
+        0px 3px 0px 0px var(--color-gray-400),
+        0px -3px 0px 0px var(--color-gray-400);
+}
+
+.pixel-border-button-gray:focus {
+    box-shadow:
+        -3px 0px 0px 0px var(--color-red-800),
+        3px 0px 0px 0px var(--color-red-800),
+        0px 3px 0px 0px var(--color-red-800),
+        0px -3px 0px 0px var(--color-red-800);
+}

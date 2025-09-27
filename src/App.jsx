@@ -31,6 +31,7 @@ function App() {
     const [error, setError] = useState(null);
     const [timeRangeDays, setTimeRangeDays] = useState(0.5); // Default to last 12 hours
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [averageInterval, setAverageInterval] = useState(0); // in minutes
 
     useEffect(() => {
         fetchSensorData();
@@ -89,18 +90,74 @@ function App() {
         const labels = filteredFeeds.map((feed) => new Date(feed.created_at));
 
         // Extract temperature data (field1)
-        const temperatureData = filteredFeeds.map(
+        let temperatureData = filteredFeeds.map(
             (feed) => parseFloat(feed.field1) || null,
         );
 
         // Extract humidity data (field2)
-        const humidityData = filteredFeeds.map(
+        let humidityData = filteredFeeds.map(
             (feed) => parseFloat(feed.field2) || null,
         );
 
-        const pressureData = filteredFeeds.map(
+        let pressureData = filteredFeeds.map(
             (feed) => parseFloat(feed.field3) || null,
         );
+
+        // Apply averaging if interval is set
+        if (averageInterval > 1) {
+            const intervalMs = averageInterval * 60 * 1000; // Convert minutes to milliseconds
+
+            const averageData = (data) => {
+                const averaged = [];
+                let sum = 0;
+                let count = 0;
+                let currentIntervalStart = labels[0].getTime();
+
+                for (let i = 0; i < data.length; i++) {
+                    const time = labels[i].getTime();
+                    if (time < currentIntervalStart + intervalMs) {
+                        if (data[i] !== null) {
+                            sum += data[i];
+                            count++;
+                        }
+                    } else {
+                        // Push averaged value for the interval
+                        averaged.push(count > 0 ? sum / count : null);
+                        // Reset for next interval
+                        sum = data[i] !== null ? data[i] : 0;
+                        count = data[i] !== null ? 1 : 0;
+                        currentIntervalStart += intervalMs;
+                        // Handle skipped intervals
+                        while (time >= currentIntervalStart + intervalMs) {
+                            averaged.push(null);
+                            currentIntervalStart += intervalMs;
+                        }
+                    }
+                }
+                // Push the last interval
+                averaged.push(count > 0 ? sum / count : null);
+                return averaged;
+            };
+
+            temperatureData = averageData(temperatureData);
+            humidityData = averageData(humidityData);
+            pressureData = averageData(pressureData);
+
+            // Adjust labels to match averaged data length
+            const averagedLabels = [];
+            let currentIntervalStart = labels[0].getTime();
+            for (let i = 0; i < temperatureData.length; i++) {
+                averagedLabels.push(
+                    new Date(currentIntervalStart + intervalMs / 2),
+                );
+                currentIntervalStart += intervalMs;
+            }
+            // Use averaged labels
+            labels.length = 0; // Clear existing labels
+            Array.prototype.push.apply(labels, averagedLabels);
+        }
+
+        // Prepare chart data structure
 
         const chartData = {
             labels,
@@ -237,7 +294,7 @@ function App() {
                 },
                 grid: {
                     display: true,
-                    color: "rgba(200, 200, 200, 0.3)",
+                    color: "rgba(200, 200, 200, 0.5)",
                 },
             },
             y: {
@@ -263,7 +320,7 @@ function App() {
                 },
                 grid: {
                     display: true,
-                    color: "rgba(200, 200, 200, 0.3)",
+                    color: "rgba(200, 200, 200, 0.5)",
                 },
             },
             y1: {
@@ -289,7 +346,6 @@ function App() {
                 },
                 grid: {
                     drawOnChartArea: false,
-                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
             y2: {
@@ -315,7 +371,6 @@ function App() {
                 },
                 grid: {
                     drawOnChartArea: false,
-                    color: "rgba(200, 200, 200, 0.3)",
                 },
             },
         },
@@ -362,7 +417,7 @@ function App() {
                 {/*  <h2 className="mb-6 mt-6 text-2xl font-bold text-gray-800 sm:text-5xl">Pi Sensor Dashboard</h2> */}
                 {/* Latest Sensor Readings */}
                 {sensorData && (
-                    <div className="m-4 mb-6 grid grid-cols-2 gap-5 text-3xl text-gray-100 md:m-8 md:grid-cols-3 md:gap-6 md:text-4xl">
+                    <div className="m-4 mb-6 grid w-full grid-cols-2 gap-5 px-4 text-3xl text-gray-100 md:m-8 md:w-auto md:grid-cols-3 md:gap-6 md:text-4xl">
                         <div className="pixel-border-card-red bg-red-950 p-3 text-center shadow-md">
                             <p className="font-semibold">Temperature</p>
                             <p className="font-jersey-10 text-5xl font-semibold text-red-500 md:text-5xl">
@@ -402,67 +457,103 @@ function App() {
                 {/* Chart Container with responsive height */}
                 {chartData && (
                     <div
-                        className="mx-2 w-full px-1"
+                        className="mx-2 w-full px-1.5"
                         style={{ height: isMobile ? "250px" : "400px" }}
                     >
                         <Line options={chartOptions} data={chartData} />
                     </div>
                 )}
 
-                {/* Controls */}
-                {/* Time Range Buttons */}
-                <div className="pixel-border-card mt-4 flex items-center justify-center gap-2 bg-zinc-700 p-3">
-                    <p className="text-xl font-semibold text-gray-100">
-                        Time Range:
-                    </p>
-                    <div className="text-md flex gap-2">
-                        <button
-                            onClick={() => setTimeRangeDays(0.5)}
-                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
-                                timeRangeDays === 0.5
-                                    ? "pixel-border-button-red bg-red-600 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
+                <div className="flex w-full flex-col px-4 md:w-auto">
+                    {/* Controls */}
+                    {/* Time Range Buttons */}
+                    <div className="pixel-border-card mt-4 flex items-center justify-between bg-zinc-700 p-2">
+                        <p className="w-2/5 text-xl font-semibold text-gray-100">
+                            Time Range:
+                        </p>
+                        <div className="text-md flex w-3/5 items-center justify-between gap-3">
+                            <button
+                                onClick={() => {
+                                    setTimeRangeDays(0.5);
+                                    setAverageInterval(0);
+                                }}
+                                className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
+                                    timeRangeDays === 0.5
+                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                12 H
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTimeRangeDays(1);
+                                    setAverageInterval(15);
+                                }}
+                                className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
+                                    timeRangeDays === 1
+                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                1 D
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTimeRangeDays(2);
+                                    setAverageInterval(30);
+                                }}
+                                className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
+                                    timeRangeDays === 2
+                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                2 D
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTimeRangeDays(3);
+                                    setAverageInterval(60);
+                                }}
+                                className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
+                                    timeRangeDays === 3
+                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                3 D
+                            </button>
+                        </div>
+                    </div>
+                    {/* Averaging Interval Selector */}
+                    <div className="pixel-border-card mt-5 flex items-center justify-between bg-zinc-700 p-2">
+                        <p className="w-2/5 text-xl font-semibold text-gray-100">
+                            Average over:
+                        </p>
+                        <select
+                            value={averageInterval}
+                            onChange={(e) => {
+                                setAverageInterval(parseInt(e.target.value));
+                                e.target.blur();
+                            }}
+                            className="pixel-border-button-gray w-3/5 bg-gray-200 px-2 py-1 font-mono text-gray-700 focus:bg-red-600 focus:text-gray-100 sm:px-3 sm:py-2 sm:text-sm"
+                            style={{ fontFamily: "'Jersey 10', monospace" }}
                         >
-                            12 Hours
-                        </button>
-                        <button
-                            onClick={() => setTimeRangeDays(1)}
-                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
-                                timeRangeDays === 1
-                                    ? "pixel-border-button-red bg-red-600 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                        >
-                            1 Day
-                        </button>
-                        <button
-                            onClick={() => setTimeRangeDays(2)}
-                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
-                                timeRangeDays === 2
-                                    ? "pixel-border-button-red bg-red-600 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                        >
-                            2 Days
-                        </button>
-                        <button
-                            onClick={() => setTimeRangeDays(3)}
-                            className={`px-2 py-1 font-medium transition-colors sm:px-3 sm:text-sm ${
-                                timeRangeDays === 3
-                                    ? "pixel-border-button-red bg-red-600 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                        >
-                            3 Days
-                        </button>
+                            <option value={1}>No Averaging</option>
+                            <option value={5}>5 Minutes</option>
+                            <option value={15}>15 Minutes</option>
+                            <option value={30}>30 Minutes</option>
+                            <option value={60}>1 Hour</option>
+                            <option value={120}>2 Hours</option>
+                        </select>
                     </div>
                 </div>
 
                 {/* Refresh Button */}
                 <button
                     onClick={fetchSensorData}
-                    className="pixel-border-button-green mt-8 bg-green-500 px-5 py-2 text-3xl font-bold text-white hover:bg-green-700 md:text-4xl"
+                    className="pixel-border-button-green mt-8 bg-green-500 px-8 py-2 text-3xl font-bold text-white hover:bg-green-700 md:text-4xl"
                     disabled={loading}
                 >
                     Refresh
