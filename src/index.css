@@ -493,16 +493,16 @@
 
 /* :not(:required) hides this rule from IE9 and below */
 .atebits-loader:not(:required) {
-    background: var(--color-red-500);
+    background: var(--color-blue-500);
     display: inline-block;
     width: 9px;
     height: 9px;
     overflow: hidden;
     position: relative;
     text-indent: -9999px;
-    -moz-box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-red-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-red-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-red-500) 0 12px 0 0, var(--color-red-500) 12px 12px 0 0;
-    -webkit-box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-red-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-red-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-red-500) 0 12px 0 0, var(--color-red-500) 12px 12px 0 0;
-    box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-red-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-red-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-red-500) 0 12px 0 0, var(--color-red-500) 12px 12px 0 0;
+    -moz-box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-green-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-green-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-blue-500) 0 12px 0 0, var(--color-green-500) 12px 12px 0 0;
+    -webkit-box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-green-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-green-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-blue-500) 0 12px 0 0, var(--color-green-500) 12px 12px 0 0;
+    box-shadow: var(--color-red-500) -12px -12px 0 0, var(--color-blue-500) 0 -12px 0 0, var(--color-green-500) 12px -12px 0 0, var(--color-red-500) -12px 0 0 0, var(--color-green-500) 12px 0 0 0, var(--color-red-500) -12px 12px 0 0, var(--color-blue-500) 0 12px 0 0, var(--color-green-500) 12px 12px 0 0;
     -moz-animation: atebits-loader 5s infinite ease-in-out;
     -webkit-animation: atebits-loader 5s infinite ease-in-out;
     animation: atebits-loader 5s infinite ease-in-out;
