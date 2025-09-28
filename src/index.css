@@ -17,11 +17,10 @@
 * {}
 
 .pixel-border-card {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-zinc-700),
-        3px 0px 0px 0px var(--color-zinc-700),
-        0px 3px 0px 0px var(--color-zinc-700),
-        0px -3px 0px 0px var(--color-zinc-700),
+    box-shadow: -3px 0px 0px 0px var(--color-zinc-800),
+        3px 0px 0px 0px var(--color-zinc-800),
+        0px 3px 0px 0px var(--color-zinc-800),
+        0px -3px 0px 0px var(--color-zinc-800),
 
         -6px 0px 0px 0px var(--color-gray-400),
         0px 6px 0px 0px var(--color-gray-400),
@@ -33,8 +32,7 @@
 }
 
 .pixel-border-card-red {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-red-950),
+    box-shadow: -3px 0px 0px 0px var(--color-red-950),
         3px 0px 0px 0px var(--color-red-950),
         0px 3px 0px 0px var(--color-red-950),
         0px -3px 0px 0px var(--color-red-950),
@@ -49,8 +47,7 @@
 }
 
 .pixel-border-card-blue {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-blue-950),
+    box-shadow: -3px 0px 0px 0px var(--color-blue-950),
         3px 0px 0px 0px var(--color-blue-950),
         0px 3px 0px 0px var(--color-blue-950),
         0px -3px 0px 0px var(--color-blue-950),
@@ -65,8 +62,7 @@
 }
 
 .pixel-border-card-green {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-green-950),
+    box-shadow: -3px 0px 0px 0px var(--color-green-950),
         3px 0px 0px 0px var(--color-green-950),
         0px 3px 0px 0px var(--color-green-950),
         0px -3px 0px 0px var(--color-green-950),
@@ -81,24 +77,22 @@
 }
 
 .pixel-border-background {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-zinc-800),
-        3px 0px 0px 0px var(--color-zinc-800),
-        0px 3px 0px 0px var(--color-zinc-800),
-        0px -3px 0px 0px var(--color-zinc-800),
+    box-shadow: -3px 0px 0px 0px var(--color-zinc-900),
+        3px 0px 0px 0px var(--color-zinc-900),
+        0px 3px 0px 0px var(--color-zinc-900),
+        0px -3px 0px 0px var(--color-zinc-900),
 
-        -6px 0px 0px 0px var(--color-gray-500),
-        0px 6px 0px 0px var(--color-gray-500),
-        6px 0px 0px 0px var(--color-gray-500),
-        0px -6px 0px 0px var(--color-gray-500),
+        -6px 0px 0px 0px var(--color-gray-400),
+        0px 6px 0px 0px var(--color-gray-400),
+        6px 0px 0px 0px var(--color-gray-400),
+        0px -6px 0px 0px var(--color-gray-400),
 
-        0px 0px 0px 3px var(--color-gray-500);
+        0px 0px 0px 3px var(--color-gray-400);
 
 }
 
 .pixel-border-button-green {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-green-500),
+    box-shadow: -3px 0px 0px 0px var(--color-green-500),
         3px 0px 0px 0px var(--color-green-500),
         0px 3px 0px 0px var(--color-green-500),
         0px -3px 0px 0px var(--color-green-500),
@@ -112,8 +106,7 @@
 }
 
 .pixel-border-button-red {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-red-800),
+    box-shadow: -3px 0px 0px 0px var(--color-red-800),
         3px 0px 0px 0px var(--color-red-800),
         0px 3px 0px 0px var(--color-red-800),
         0px -3px 0px 0px var(--color-red-800);
@@ -122,24 +115,21 @@
 
 
 .pixel-border-button-gray {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-gray-300),
-        3px 0px 0px 0px var(--color-gray-300),
-        0px 3px 0px 0px var(--color-gray-300),
-        0px -3px 0px 0px var(--color-gray-300);
-}
-
-.pixel-border-button-gray:hover {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-gray-400),
+    box-shadow: -3px 0px 0px 0px var(--color-gray-400),
         3px 0px 0px 0px var(--color-gray-400),
         0px 3px 0px 0px var(--color-gray-400),
         0px -3px 0px 0px var(--color-gray-400);
 }
 
+.pixel-border-button-gray:hover {
+    box-shadow: -3px 0px 0px 0px var(--color-gray-500),
+        3px 0px 0px 0px var(--color-gray-500),
+        0px 3px 0px 0px var(--color-gray-500),
+        0px -3px 0px 0px var(--color-gray-500);
+}
+
 .pixel-border-button-gray:focus {
-    box-shadow:
-        -3px 0px 0px 0px var(--color-red-800),
+    box-shadow: -3px 0px 0px 0px var(--color-red-800),
         3px 0px 0px 0px var(--color-red-800),
         0px 3px 0px 0px var(--color-red-800),
         0px -3px 0px 0px var(--color-red-800);

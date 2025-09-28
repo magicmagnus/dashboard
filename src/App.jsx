@@ -386,7 +386,7 @@ function App() {
     if (loading) {
         return (
             <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
-                <div className="pixel-border-card bg-zinc-700 p-6 text-center shadow-lg">
+                <div className="pixel-border-card bg-zinc-800 p-6 text-center shadow-lg">
                     <div className="atebits-loader"></div>
                     <p className="mt-4 text-gray-300">Loading sensor data...</p>
                 </div>
@@ -397,7 +397,7 @@ function App() {
     if (error) {
         return (
             <div className="font-jersey-10 flex min-h-screen items-center justify-center bg-zinc-950">
-                <div className="pixel-border-card bg-zinc-700 p-6 text-center shadow-lg">
+                <div className="pixel-border-card bg-zinc-800 p-6 text-center shadow-lg">
                     <p className="mb-4 text-red-500">{error}</p>
                     <button
                         onClick={fetchSensorData}
@@ -412,7 +412,7 @@ function App() {
 
     return (
         <div className="font-jersey-10 flex min-h-[100dvh] flex-col items-center justify-center bg-zinc-950 p-2 text-white">
-            <div className="pixel-border-background flex w-full flex-1 flex-col items-center justify-start bg-zinc-800 shadow-lg sm:max-w-6xl md:flex-0">
+            <div className="pixel-border-background flex w-full flex-1 flex-col items-center justify-start bg-zinc-900 shadow-lg sm:max-w-6xl md:flex-0">
                 {/* Header */}
                 {/*  <h2 className="mb-6 mt-6 text-2xl font-bold text-gray-800 sm:text-5xl">Pi Sensor Dashboard</h2> */}
                 {/* Latest Sensor Readings */}
@@ -467,7 +467,7 @@ function App() {
                 <div className="flex w-full flex-col px-4 md:w-auto">
                     {/* Controls */}
                     {/* Time Range Buttons */}
-                    <div className="pixel-border-card mt-4 flex items-center justify-between bg-zinc-700 p-2">
+                    <div className="pixel-border-card mt-4 flex items-center justify-between bg-zinc-800 p-2">
                         <p className="w-2/5 text-xl font-semibold text-gray-100">
                             Time Range:
                         </p>
@@ -479,7 +479,7 @@ function App() {
                                 }}
                                 className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
                                     timeRangeDays === 0.5
-                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        ? "pixel-border-button-red bg-red-600 py-0 text-white"
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
@@ -492,7 +492,7 @@ function App() {
                                 }}
                                 className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
                                     timeRangeDays === 1
-                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        ? "pixel-border-button-red bg-red-600 py-0 text-white"
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
@@ -505,7 +505,7 @@ function App() {
                                 }}
                                 className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
                                     timeRangeDays === 2
-                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        ? "pixel-border-button-red bg-red-600 py-0 text-white"
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
@@ -518,7 +518,7 @@ function App() {
                                 }}
                                 className={`h-fit w-24 px-2 font-medium transition-colors sm:text-sm ${
                                     timeRangeDays === 3
-                                        ? "pixel-border-button-red bg-red-600 py-0.5 text-white"
+                                        ? "pixel-border-button-red bg-red-600 py-0 text-white"
                                         : "pixel-border-button-gray bg-gray-200 py-0 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
@@ -527,7 +527,7 @@ function App() {
                         </div>
                     </div>
                     {/* Averaging Interval Selector */}
-                    <div className="pixel-border-card mt-5 flex items-center justify-between bg-zinc-700 p-2">
+                    <div className="pixel-border-card mt-5 flex items-center justify-between bg-zinc-800 p-2">
                         <p className="w-2/5 text-xl font-semibold text-gray-100">
                             Average over:
                         </p>
